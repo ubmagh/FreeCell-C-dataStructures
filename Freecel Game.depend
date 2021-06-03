@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1622755522 source:d:\ensetm\mein s2\data structures\freecel game\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Card.h"
+	"Cell.h"
+
+1622678835 d:\ensetm\mein s2\data structures\freecel game\carte.h
+
+1622679320 d:\ensetm\mein s2\data structures\freecel game\case.h
+
+1622752854 d:\ensetm\mein s2\data structures\freecel game\card.h
+
+1622752850 d:\ensetm\mein s2\data structures\freecel game\cell.h
+	"Card.h"
+
+1622753243 source:d:\ensetm\mein s2\data structures\freecel game\card.c
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	"Card.h"
+
+1622756207 source:d:\ensetm\mein s2\data structures\freecel game\cell.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Cell.h"
+
