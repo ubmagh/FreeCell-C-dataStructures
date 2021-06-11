@@ -18,6 +18,12 @@ void initiate_zones( Card ***Cards_DB, Cell ***zone1, Cell ***zone2, Cell ***zon
 void free_zones( Cell ***zone1, Cell ***zone2, Cell ***zone3);
 void push_card( Cell **cardStack, Card *card);
 void show_zone( Cell **zone, int zoneNumber, int zoneSize);// zoneSize = number of cols
+void show_all_zones( Cell **zone1, Cell **zone2, Cell **zone3);
+int does_col_existsIn_zone( int col, int zone);
+Card * peek_card(Cell *cardStack); // just getting the adress of the card in the head of the stack
+int check_move_possibility(Cell **zone1, Cell **zone2, Cell **zone3, int, int, int, int);
+Card * pop_card( Cell **cardStack );
+void move_card(Cell **zone1, Cell **zone2, Cell **zone3, int, int, int, int);
 
 
 #endif // CELL_H_INCLUDED
