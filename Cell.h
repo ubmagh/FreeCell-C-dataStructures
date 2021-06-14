@@ -24,6 +24,8 @@ Card * peek_card(Cell *cardStack); // just getting the adress of the card in the
 int check_move_possibility(Cell **zone1, Cell **zone2, Cell **zone3, int, int, int, int);
 Card * pop_card( Cell **cardStack );
 void move_card(Cell **zone1, Cell **zone2, Cell **zone3, int, int, int, int);
+int check_win(Cell **zone1, Cell **zone2, Cell **zone3);
 
+void initiate_easy_game(Card ***Cards_DB, Cell ***zone1, Cell ***zone2, Cell ***zone3);
 
 #endif // CELL_H_INCLUDED

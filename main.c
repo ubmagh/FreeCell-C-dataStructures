@@ -14,7 +14,7 @@
 
 
 void clrScrn();
-int menu();
+int menu(int win);
 void collect_move_details( int *, int *, int *, int *);
 
 
@@ -29,21 +29,33 @@ Cell **Zone3 ;
 
 
 int main(){
-    int choice=0, restart =0;
+    int choice=0, restart =0, win=0;
     int DepartZone, DepartCol; // Be careful DepartCol &
     int DestZone, DestCol;  // DestCol should be expressed later with 0->n-1 ; array indexe
 
 startGame:
     Initiate_CardsDB( &Cards_DB); // creates cards
-    initiate_zones( Cards_DB, &Zone1, &Zone2, &Zone3); // fills Zone1 with random cards
+
+
+    /** Choose game Type */
+
+    // Hard Game
+        initiate_zones( Cards_DB, &Zone1, &Zone2, &Zone3); // fills Zone1 with quiet randomized cards  => hard game
+
+    // Easy game
+        // initiate_easy_game( Cards_DB, &Zone1, &Zone2, &Zone3); // fills Zone1 with  cards  => easy game
+
+
+
     restart = 0;
     while( 1 ){
 
         do{
             clrScrn();
             show_all_zones( Zone1, Zone2, Zone3);
-            choice = menu();
-        }while( choice <1 || choice >3 );
+            win = check_win( Zone1, Zone2, Zone3);
+            choice = menu(win);
+        }while( (win==1 && ( choice <2 || choice >3 ) ) || ( win==0 && ( choice <1 || choice >3 ) ) );
         switch(choice){
             case 1:
                 clrScrn();
@@ -66,10 +78,12 @@ startGame:
             break;
             case 2:
                 restart = 1;
+                win = 0;
                 goto exitDoor;
                 break;
             case 3:
                 clrScrn();
+                win = 0;
                 printf("\n\n\n\n\n\n\t\t\t ..:| GooD Bye |:..\n\n\n\n\n\n\n\n\n");
                 goto exitDoor;
                 break;
@@ -86,10 +100,13 @@ exitDoor:
 
 
 
-int menu(){
+int menu(int win){
     int i;
     printf("\n\n\t-------------------------------------Menu---------------------------------------");
-    printf("\n\t\t 1: Deplacer une carte  |  2: Rejouer la partie  | 3: quitter");
+    if(win)
+        printf("\n\t\t\t\t *****  Partie Gagnée !! *********\n\n\t\t     |  2: Rejouer la partie  | 3: quitter");
+    else
+        printf("\n\t\t 1: Deplacer une carte  |  2: Rejouer la partie  | 3: quitter");
     printf("\n\t--------------------------------------------------------------------------------\n\t\t votre choix est -> ");
     scanf(" %d", &i);
     return i;

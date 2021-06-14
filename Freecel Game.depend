@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1623374479 source:d:\ensetm\mein s2\data structures\freecel game\main.c
+1623671424 source:d:\ensetm\mein s2\data structures\freecel game\main.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -12,7 +12,7 @@
 
 1623363173 d:\ensetm\mein s2\data structures\freecel game\card.h
 
-1623375305 d:\ensetm\mein s2\data structures\freecel game\cell.h
+1623670555 d:\ensetm\mein s2\data structures\freecel game\cell.h
 	"Card.h"
 
 1623365284 source:d:\ensetm\mein s2\data structures\freecel game\card.c
@@ -21,7 +21,7 @@
 	<stdio.h>
 	"Card.h"
 
-1623368732 source:d:\ensetm\mein s2\data structures\freecel game\cell.c
+1623673450 source:d:\ensetm\mein s2\data structures\freecel game\cell.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>

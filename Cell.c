@@ -200,6 +200,9 @@ int check_move_possibility(Cell **zone1, Cell **zone2, Cell **zone3, int DepartZ
     DepartCard = peek_card( DepZone[DepartCol-1] );
     DestCard = peek_card( DesZone[DestCol-1] );
 
+    if( DepartCard == NULL )
+        return 0;
+
 
     if( DestZone==2  ){
         if(DestCard!=NULL)
@@ -207,16 +210,19 @@ int check_move_possibility(Cell **zone1, Cell **zone2, Cell **zone3, int DepartZ
     }
     else{
         if( DestZone == 3){
-            if( DestCard!=NULL && DepartCard->num!=1 )
+            if( DestCard==NULL && DepartCard->num !=1  )
                 return 0;
+
             if(DestCard!=NULL)
-            if( ( DestCard->num != (DepartCard->num-1) ) || !strcmp( DestCard->type, DepartCard->type)  )
-                return 0;
+                if( ( DestCard->num != (DepartCard->num-1) ) || ( strcmp( DestCard->type, DepartCard->type)!=0 )  )
+                    return 0;
         }
         else{
+            if(DestCard!=NULL)
             if( DestCard->num != (DepartCard->num+1) )
             return 0;
 
+            if(DestCard!=NULL)
             if( !cards_match_2to1( DestCard, DepartCard) )
                 return 0;
         }
@@ -256,3 +262,70 @@ void move_card(Cell **zone1, Cell **zone2, Cell **zone3, int DepartZone, int Dep
     else
         push_card( &(zone3[DestCol-1]), card);
 }
+
+int check_win(Cell **zone1, Cell **zone2, Cell **zone3){
+
+    int i;
+
+    for( i=0; i<8; i++){
+        if( zone1[i]!=NULL )
+            return 0;
+    }
+
+    for( i=0; i<4; i++){
+        if( zone2[i]!=NULL )
+            return 0;
+    }
+
+    return 1;
+
+}
+
+void initiate_easy_game(Card ***Cards_DB, Cell ***zone1, Cell ***zone2, Cell ***zone3){
+
+    int i;
+    *zone1 = (Cell **) malloc( 8 * sizeof( Cell* ) );
+    *zone2 = (Cell **) malloc( 4 * sizeof( Cell* ) );
+    *zone3 = (Cell **) malloc( 4 * sizeof( Cell* ) );
+
+    // set all stacks of zone 2 and zone 3 to NULL => they are empty initially
+    for( i=0; i<8; i++)
+        (*zone1)[i] = NULL;
+    for( i=0; i<4; i++){
+        (*zone2)[i] = NULL;
+        (*zone3)[i] = NULL;
+    }
+
+
+    // zone1 : col 1 => cards (of type A) from 13 to 7
+    for( i=12; i>5; i--)
+        push_card( &( (*zone1)[0] ), Cards_DB[0][i]);
+    // zone1 : col 2 => cards (of type A) from 6 to 1
+    for( i=5; i>=0; i--)
+        push_card( &( (*zone1)[1] ), Cards_DB[0][i]);
+
+
+    // zone1 : col 3 => cards (of type B) from 13 to 7
+    for( i=12; i>5; i--)
+        push_card( &( (*zone1)[2] ), Cards_DB[1][i]);
+    // zone1 : col 4 => cards (of type B) from 6 to 1
+    for( i=5; i>=0; i--)
+        push_card( &( (*zone1)[3] ), Cards_DB[1][i]);
+
+
+    // zone1 : col 5 => cards (of type C) from 13 to 7
+    for( i=12; i>5; i--)
+        push_card( &( (*zone1)[4] ), Cards_DB[2][i]);
+    // zone1 : col 6 => cards (of type C) from 6 to 1
+    for( i=5; i>=0; i--)
+        push_card( &( (*zone1)[5] ), Cards_DB[2][i]);
+
+
+    // zone1 : col 7 => cards (of type D) from 13 to 7
+    for( i=12; i>5; i--)
+        push_card( &( (*zone1)[6] ), Cards_DB[3][i]);
+    // zone1 : col 8 => cards (of type D) from 6 to 1
+    for( i=5; i>=0; i--)
+        push_card( &( (*zone1)[7] ), Cards_DB[3][i]);
+}
+
